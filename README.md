@@ -1,2 +1,1 @@
-# snake
-Snake JS
+Snake eating eggs
