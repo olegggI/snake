@@ -8,13 +8,13 @@ $(document).ready(function() {
     }
 
     
-    var zmeyka = new Object();
-    zmeyka.speed = 50; // Скорость змейки   
-    zmeyka.xx = 60; // Поле по x
-    zmeyka.yy = 60; // Поле по y
+    var zmeyka = {};
+    zmeyka.speed = 50; // snake spead
+    zmeyka.xx = 60; // x
+    zmeyka.yy = 60; // y
     zmeyka.polesize = zmeyka.xx*10+10;
     
-    zmeyka.elem = new Array();
+    zmeyka.elem = [];
     
     var xxx = rand(0,zmeyka.xx);
     var yyy = rand(0,zmeyka.yy);
@@ -26,18 +26,17 @@ $(document).ready(function() {
     zmeyka.yayx = rand(0,zmeyka.xx);
     zmeyka.yayy = rand(0,zmeyka.xx);
      
-    zmeyka.poleBuild = function () { // Метод строит поле
+    zmeyka.poleBuild = function () { // init Area
         var pole = new String();
         for (var y = 0; y < this.yy + 1; y++) {
             for (var x = 0; x < this.xx + 1; x++){
                 pole += '<div class="kvadrat" id="xy_' + x + '_' + y + '"></div>';
             }
         }
-        $("#body").append('<div style="width: ' + zmeyka.polesize + '; height: ' + zmeyka.polesize + '" class="pole">' + pole + '</div>');
-        //$("#xy_" + zmeyka.elem[0].x + "_"+ zmeyka.elem[0].x).addClass('zmeya');   /// Будуємо квадрат    
+        $("#body").append('<div style="width: ' + zmeyka.polesize + '; height: ' + zmeyka.polesize + '" class="pole">' + pole + '</div>');   
     }
      
-    zmeyka.yaytsoBuild = function (){  // метод будує яйце
+    zmeyka.yaytsoBuild = function (){  // egg create
         $("#xy_" + zmeyka.yayx + "_"+ zmeyka.yayy).addClass('yaytso');
     }
     zmeyka.yaytsoUnBuild = function (){
@@ -47,7 +46,7 @@ $(document).ready(function() {
     
      
     zmeyka.move = function () {
-    if (zmeyka.elem.length >= 1 && zmeyka.trevoga==false) { // якщо довжина змійки більше 1
+    if (zmeyka.elem.length >= 1 && zmeyka.trevoga==false) { // if snake length > 1
         for (var i = zmeyka.elem.length; i >= 1  ; i--){
                 zmeyka.elem[i]  = {x: zmeyka.elem[i-1].x, y: zmeyka.elem[i-1].y}; // позначаємо координати елементів
                 // координата останнього - має координату попередника.
